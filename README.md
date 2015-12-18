@@ -31,11 +31,11 @@ A docker container for Steam based game servers via [SteamCMD](https://developer
 
 **Optional.**  The URL from which to fetch SteamCMD.  The default, as documented [here](https://developer.valvesoftware.com/wiki/SteamCMD#Linux) is `https://steamcdn-a.akamaihd.net/client/installer/steamcmd_linux.tar.gz`.
 
-#### STEAMCMD_DIR
+### STEAMCMD_DIR
 
 **Optional.**  The path at which to install SteamCMD.  The default is `/steam/steamcmd`.
 
-#### STEAMCMD_ARGS
+### STEAMCMD_ARGS
 
 **Optional.**  The arguments to pass to `steamcmd`.  This will completely override `STEAM_APP_ID` and `STEAM_APP_DIR` and you will need to tell SteamCMD which app you wish to install and where you wish it to be installed, as documented [here](https://developer.valvesoftware.com/wiki/SteamCMD#Downloading_an_app).
 

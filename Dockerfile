@@ -16,7 +16,15 @@ ADD ./steam /steam
 
 WORKDIR /steam
 
+RUN useradd steam && \
+    mkdir -p /steam/app && \
+    mkdir -p /steam/steamcmd && \
+    chown -R steam:steam /steam
+
+USER steam
+
 ENV STEAMCMD_URL="https://steamcdn-a.akamaihd.net/client/installer/steamcmd_linux.tar.gz" \
-    STEAMCMD_DIR="/steam/steamcmd"
+    STEAMCMD_DIR="/steam/steamcmd" \
+    STEAM_APP_DIR="/steam/app"
 
 CMD /steam/init.sh

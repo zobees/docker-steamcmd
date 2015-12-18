@@ -5,9 +5,9 @@ set -e
 steamcmd="$STEAMCMD_DIR/steamcmd.sh"
 
 if [ -n "$SKIP_INSTALL" ]; then
-  echo "Skipping SteamCMD install as requested by SKIP_INSTALL."
+  echo "Not installing SteamCMD as requested by SKIP_INSTALL."
 else
-  if [ -x "$steamcmd" ] then
+  if [ -x "$steamcmd" ]; then
     echo "SteamCMD already present in $STEAMCMD_DIR, skipping install."
   else
     echo "Installing SteamCMD in $STEAMCMD_DIR.."
@@ -16,19 +16,27 @@ else
 fi
 
 if [ -n "$SKIP_SETUP" ]; then
-  echo "Skipping SteamCMD setup as requested by SKIP_SETUP."
+  echo "Not running SteamCMD as requested by SKIP_SETUP."
 else
-  if [ -z "$STEAM_APP_ID" ]; then
-    echo "ERROR: no STEAM_APP_ID specified!"
+  if [ -n "$STEAM_APP_ID" ]; then
+    if [ -n "$STEAM_USERNAME" ]; then
+      STEAMCMD_ARGS="+login $STEAM_USERNAME $STEAM_PASSWORD "
+    fi
+
+    STEAMCMD_ARGS+="+force_install_dir $STEAM_APP_DIR +app_update $STEAM_APP_ID validate "
+  fi
+
+  if [ -z "$STEAMCMD_ARGS" ]; then
+    echo "ERROR: no STEAM_APP_ID or STEAMCMD_ARGS specified!"
     exit 1
   fi
 
-  echo "Setting up.."
-  $steamcmd +runscript $STEAMCMD_ARGS +quit
+  echo "Running SteamCMD.."
+  $steamcmd $STEAMCMD_ARGS +quit
 fi
 
-if [ -z "$STEAM_CMD" ]; then
-  echo "Nothing left to do, no STEAMCMD_CMD specified."
+if [ -z "$STEAM_APP_CMD" ]; then
+  echo "Nothing left to do, no STEAM_APP_CMD specified."
 else
-  exec $STEAM_CMD
+  exec $STEAM_APP_CMD
 fi
