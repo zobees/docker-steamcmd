@@ -1,9 +1,12 @@
-# steamcmd
+## steamcmd
 
 A docker container for Steam based game servers via [SteamCMD](https://developer.valvesoftware.com/wiki/SteamCMD).
 
-**Currently in development and not suitable for general use.**
-**Feel free to play with it, but do so entirely at your own risk.**
+**Currently in development and not suitable for general use.  Feel free to play with it, but do so entirely at your own risk.**
+
+## Overview
+
+Whilst you could probably pull and run this image as-is, you'll likely need to customize it somewhat to add config files, volumes, or whatever.  I've tried to keep things flexible enough to do that, or to (ideally) use this as a base for more specific Steam apps.
 
 ## Environment variables
 

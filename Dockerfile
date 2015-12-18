@@ -12,19 +12,18 @@ RUN apt-get update && \
     lib32z1-dev \
     curl
 
-ADD ./steam /steam
-
-WORKDIR /steam
-
 RUN useradd steam && \
-    mkdir -p /steam/app && \
-    mkdir -p /steam/steamcmd && \
-    chown -R steam:steam /steam
+    mkdir -p /home/steam/app && \
+    mkdir -p /home/steam/steamcmd && \
+    chown -R steam:steam /home/steam
 
-USER steam
+ADD ./steam /home/steam
 
 ENV STEAMCMD_URL="https://steamcdn-a.akamaihd.net/client/installer/steamcmd_linux.tar.gz" \
-    STEAMCMD_DIR="/steam/steamcmd" \
-    STEAM_APP_DIR="/steam/app"
+    STEAMCMD_DIR="/home/steam/steamcmd" \
+    STEAM_APP_DIR="/home/steam/app"
 
-CMD /steam/init.sh
+USER steam
+WORKDIR /home/steam
+
+CMD /home/steam/bin/init.sh

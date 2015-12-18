@@ -2,8 +2,8 @@ app_data:
   image: zobees/steamcmd:0.0.1
   command: echo "Example data volume"
   volumes:
-    - /steam/steamcmd
-    - /steam/app
+    - /home/steam/steamcmd
+    - /home/steam/app
 
 app:
   image: zobees/steamcmd:0.0.1

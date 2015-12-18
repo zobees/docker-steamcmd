@@ -23,7 +23,7 @@ else
       STEAMCMD_ARGS="+login $STEAM_USERNAME $STEAM_PASSWORD "
     fi
 
-    STEAMCMD_ARGS+="+force_install_dir $STEAM_APP_DIR +app_update $STEAM_APP_ID validate "
+    STEAMCMD_ARGS+="+force_install_dir $STEAM_APP_DIR +app_update $STEAM_APP_ID "
   fi
 
   if [ -z "$STEAMCMD_ARGS" ]; then
