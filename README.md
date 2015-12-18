@@ -7,41 +7,37 @@ A docker container for Steam based game servers via [SteamCMD](https://developer
 
 ## Environment variables
 
-### Steam
+### STEAM_APP_ID
 
-**STEAM_APP_ID** (required unless `STEAMCMD_ARGS` is specified)
+**Required unless `STEAMCMD_ARGS` is specified.**  The ID of the Steam app you wish to install, which you can search for [here](http://steamdb.info).  Has no effect if `STEAMCMD_ARGS` is specified.
 
-The ID of the Steam app you wish to install, which you can search for [here](http://steamdb.info).  Has no effect if `STEAMCMD_ARGS` is specified.
+### STEAM_APP_CMD
 
-**STEAM_APP_CMD** (required)
+**Required always.**  The command to run the Steam app.  E.g. `/steam/app/some-ded-server --some-option`.  This must be `exec`-able in order to ensure signals propagate (and therefore the container can shut down gracefully).
 
-The command to run the Steam app.  E.g. `/steam/app/some-ded-server --some-option`.  This must be `exec`-able in order to ensure signals propagate (and therefore the container can shut down gracefully).
+### STEAM_USERNAME
 
-**STEAM_USERNAME** (optional)
+**Optional.**  The Steam username to authenticate with in order to install Steam apps that require it.
 
-The Steam username to authenticate with in order to install Steam apps that require it.
+### STEAM_PASSWORD
 
-**STEAM_PASSWORD** (optional)
+**Optional.**  The Steam password to authenticate with in order to install Steam apps that require it.
 
-The Steam password to authenticate with in order to install Steam apps that require it.
+### STEAM_APP_DIR
 
-**STEAM_APP_DIR** (optional)
+**Optional.**  The path at which to install the Steam app.  Has no effect if `STEAMCMD_ARGS` is specified.
 
-The path at which to install the Steam app.  Has no effect if `STEAMCMD_ARGS` is specified.
+### STEAMCMD_URL
 
-### SteamCMD
+**Optional.**  The URL from which to fetch SteamCMD.  The default, as documented [here](https://developer.valvesoftware.com/wiki/SteamCMD#Linux) is `https://steamcdn-a.akamaihd.net/client/installer/steamcmd_linux.tar.gz`.
 
-**STEAMCMD_URL** (optional)
+#### STEAMCMD_DIR
 
-The URL from which to fetch SteamCMD.  The default, as documented [here](https://developer.valvesoftware.com/wiki/SteamCMD#Linux) is `https://steamcdn-a.akamaihd.net/client/installer/steamcmd_linux.tar.gz`.
+**Optional.**  The path at which to install SteamCMD.  The default is `/steam/steamcmd`.
 
-**STEAMCMD_DIR** (optional)
+#### STEAMCMD_ARGS
 
-The path at which to install SteamCMD.  The default is `/steam/steamcmd`.
-
-**STEAMCMD_ARGS** (optional)
-
-The arguments to pass to `steamcmd`.  This will completely override `STEAM_APP_ID` and `STEAM_APP_DIR` and you will need to tell SteamCMD which app you wish to install and where you wish it to be installed, as documented [here](https://developer.valvesoftware.com/wiki/SteamCMD#Downloading_an_app).
+**Optional.**  The arguments to pass to `steamcmd`.  This will completely override `STEAM_APP_ID` and `STEAM_APP_DIR` and you will need to tell SteamCMD which app you wish to install and where you wish it to be installed, as documented [here](https://developer.valvesoftware.com/wiki/SteamCMD#Downloading_an_app).
 
 ## Disclaimer
 
