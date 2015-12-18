@@ -1,4 +1,4 @@
-## steamcmd
+# steamcmd
 
 A docker container for Steam based game servers via [SteamCMD](https://developer.valvesoftware.com/wiki/SteamCMD).
 

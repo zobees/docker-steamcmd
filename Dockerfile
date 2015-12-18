@@ -26,4 +26,4 @@ ENV STEAMCMD_URL="https://steamcdn-a.akamaihd.net/client/installer/steamcmd_linu
 USER steam
 WORKDIR /home/steam
 
-CMD /home/steam/bin/init.sh
+CMD exec /home/steam/bin/init.sh
