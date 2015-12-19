@@ -1,0 +1,19 @@
+app_data:
+  image: zobees/steamcmd
+  command: echo "Example data volume"
+  volumes:
+    - /home/steam/steamcmd
+    - /home/steam/app
+
+app:
+  image: zobees/steamcmd
+  environment:
+    STEAM_APP_ID: 294420
+    STEAM_APP_CMD: "/home/steam/app/7DaysToDieServer.x86_64 -logfile /dev/stdout -configfile=serverconfig.xml -quit -batchmode -nographics -dedicated"
+  env_file:
+    - ./auth.env
+  ports:
+    - "26900-26902"
+    - "26900-26902/udp"
+  volumes_from:
+    - app_data

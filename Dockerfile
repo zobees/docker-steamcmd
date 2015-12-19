@@ -15,6 +15,7 @@ RUN apt-get update && \
 RUN useradd steam && \
     mkdir -p /home/steam/app && \
     mkdir -p /home/steam/steamcmd && \
+    mkdir -p /home/steam/data && \
     chown -R steam:steam /home/steam
 
 ADD ./steam /home/steam
