@@ -20,11 +20,14 @@ RUN useradd steam && \
 
 ADD ./steam /home/steam
 
+USER steam
+
+ENV HOME="/home/steam"
+
 ENV STEAMCMD_URL="https://steamcdn-a.akamaihd.net/client/installer/steamcmd_linux.tar.gz" \
     STEAMCMD_DIR="/home/steam/steamcmd" \
     STEAM_APP_DIR="/home/steam/app"
 
-USER steam
 WORKDIR /home/steam
 
 CMD exec /home/steam/bin/init.sh
