@@ -18,6 +18,10 @@ Whilst you could probably pull and run this image as-is, you'll likely need to c
 
 **Required always.**  The command to run the Steam app.  E.g. `/steam/app/some-ded-server --some-option`.  This must be `exec`-able in order to ensure signals propagate (and therefore the container can shut down gracefully).
 
+### STEAM_APP_BETA
+
+**Optional.**  The app beta version to install if desired.
+
 ### STEAM_USERNAME
 
 **Optional.**  The Steam username to authenticate with in order to install Steam apps that require it.
@@ -25,6 +29,10 @@ Whilst you could probably pull and run this image as-is, you'll likely need to c
 ### STEAM_PASSWORD
 
 **Optional.**  The Steam password to authenticate with in order to install Steam apps that require it.
+
+### STEAM_GUARD
+
+**Optional.**  The SteamGuard code to authenticate with if activated.
 
 ### STEAM_APP_DIR
 
