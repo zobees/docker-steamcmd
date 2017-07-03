@@ -1,5 +1,5 @@
 version: "3.3"
 services:
-  steamcmd:
+  main:
     build: .
     image: zobees/steamcmd
