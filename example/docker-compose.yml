@@ -1,0 +1,7 @@
+version: "3.3"
+services:
+  7daystodie:
+    build: .
+    ports:
+      - "26900-26902:26900-26902"
+      - "26900-26902:26900-26902/udp"
