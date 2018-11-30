@@ -1,0 +1,21 @@
+#!/usr/bin/env bash
+
+set -e
+
+if [ -z "$STEAMCMD_APP_ID" ]; then
+  echo "ERROR: STEAMCMD_APP_ID is required"
+  exit 1
+fi
+
+[ -z "$STEAMCMD_NO_VALIDATE" ]   && validate="validate"
+[ -n "$STEAMCMD_BETA" ]          && beta="-beta $STEAMCMD_BETA"
+[ -n "$STEAMCMD_BETA_PASSWORD" ] && betapassword="-betapassword $STEAMCMD_BETA_PASSWORD"
+
+steamcmd +login ${STEAMCMD_LOGIN:-anonymous} \
+         +force_install_dir ${STEAMCMD_APP_DIR:-/data} \
+         +app_update $STEAMCMD_APP_ID $beta $betapassword $validate \
+         +quit
+
+cd $STEAMCMD_APP_DIR
+export LD_LIBRARY_PATH=.
+exec "$@"

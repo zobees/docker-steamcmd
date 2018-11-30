@@ -1,21 +1,14 @@
-FROM ubuntu:16.04
-
-LABEL MAINTAINER cliffrowley@gmail.com
+FROM zobees/steamcmd
 
 RUN apt-get -y update && \
-    DEBIAN_FRONTEND=noninteractive apt-get install -q -y --no-install-recommends \
-      ca-certificates apt-utils software-properties-common
-RUN echo steam steam/question select "I AGREE" | debconf-set-selections
-RUN echo steam steam/license note '' | debconf-set-selections
-RUN add-apt-repository multiverse && \
-    dpkg --add-architecture i386 && \
-    apt-get -y update && \
-    DEBIAN_FRONTEND=noninteractive apt-get install -q -y --no-install-recommends \
-      lib32gcc1 steamcmd && \
-    ln -sf /usr/games/steamcmd /usr/bin/steamcmd
+    DEBIAN_FRONTEND=noninteractive apt-get install -q -y --no-install-recommends gosu && \
+    rm -rf /var/lib/apt/lists/*
 
-RUN DEBIAN_FRONTEND=noninteractive apt-get purge -y \
-      apt-utils software-properties-common && \
-    DEBIAN_FRONTEND=noninteractive apt-get autoremove -y
+ADD steamcmd-entrypoint /usr/bin/steamcmd-entrypoint
+ADD steamcmd-run /usr/bin/steamcmd-run
 
-RUN steamcmd +quit
+ENTRYPOINT ["/usr/bin/steamcmd-entrypoint"]
+
+CMD ["true"]
+
+LABEL maintainer cliffrowley@gmail.com
