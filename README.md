@@ -67,6 +67,10 @@ See the source code for this and its base image for more information:
 
 ## Changes
 
+### 0.3.4
+
+ * Fixed issue preventing signals being trapped.
+
 ### 0.3.3
 
  * Fixed typo in entrypoint.
