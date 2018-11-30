@@ -67,6 +67,10 @@ See the source code for this and its base image for more information:
 
 ## Changes
 
+### 0.3.3
+
+ * Fixed typo in entrypoint.
+
 ### 0.3.2
 
  * Updated entrypoint to allow one-off commands to bypass steamcmd and removed `STEAMCMD_APP_UPDATE` again.
