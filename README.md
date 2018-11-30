@@ -4,7 +4,9 @@ A generic docker container for [SteamCMD](https://developer.valvesoftware.com/wi
 
 ## Usage
 
-Install the app specified by `STEAMCMD_APP_ID` into the directory specified by `STEAMCMD_APP_DIR` (default: `/data`).
+Installs the app specified by `STEAMCMD_APP_ID` into the directory specified by `STEAMCMD_APP_DIR` (default: `/data`).
+
+Note that you must also set `STEAMCMD_APP_UPDATE` to a non-empty value to actually run steamcmd. This is required so that one-off commands on running containers do not inadvertantly change files that are in use.
 
 For example you could run a 7 Days to Die dedicated server with the following command:
 
@@ -13,6 +15,7 @@ docker run -d -v $PWD/data:/data \
   -p 26900-26902:26900-26902 \
   -p 26900-26902:26900-26902/udp \
   -e STEAMCMD_APP_ID=294420 \
+  -e STEAMCMD_APP_UPDATE=true \
   zobees/steamcmd \
   ./7DaysToDieServer.x86_64 -logfile /dev/stdout -configfile=serverconfig.xml -quit -batchmode -nographics -dedicated
 ```
@@ -52,6 +55,10 @@ See the source code for this and its base image for more information:
  * No support for `app_set_config`.
 
 ## Changes
+
+### 0.3.1
+
+ * Added `STEAMCMD_APP_UPDATE` to simplify one off commands on running containers.
 
 ### 0.2.1
 

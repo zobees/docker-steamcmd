@@ -1,12 +1,13 @@
 version: "3.3"
 services:
-  steamcmd:
+  image:
     build: .
     image: zobees/steamcmd
     command: "./7DaysToDieServer.x86_64 -logfile /dev/stdout -configfile=serverconfig.xml -quit -batchmode -nographics -dedicated"
     environment:
       STEAMCMD_APP_ID: "294420"
       STEAMCMD_BETA: "latest_experimental"
+      STEAMCMD_APP_UPDATE: "true"
     ports:
       - "26900-26902:26900-26902"
       - "26900-26902:26900-26902/udp"
