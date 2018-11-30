@@ -21,4 +21,4 @@ if [ -z "$STEAMCMD_SKIP_UPDATE" ]; then
     +quit
 fi
 
-steamcmd-env "$@"
+exec steamcmd-env "$@"
