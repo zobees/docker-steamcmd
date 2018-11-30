@@ -3,4 +3,4 @@
 set -e
 
 [ "$1" = "steamcmd-run" ] && exec gosu ${UID:-0}:${GID:-0} "$@"
-exec gosu ${UID:-0}:${GID:-0} "steamcmd-env $@"
+exec gosu ${UID:-0}:${GID:-0} steamcmd-env "$@"
