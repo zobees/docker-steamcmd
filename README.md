@@ -39,6 +39,13 @@ Use the `STEAMCMD_BETA` environment variable to specify which beta version to in
 
 By default steamcmd is instructed to validate on installation, which does incur a delay when starting a container. Set `STEAMCMD_NO_VALIDATE` to disable validation, though it's not generally advisable.
 
+#### Other options
+
+See the source code for this and its base image for more information:
+
+ * [zobees/steamcmd](https://github.com/zobees/docker-steamcmd)
+ * [zobees/steamcmd-base](https://github.com/zobees/docker-steamcmd-base)
+
 ## Known limitations
 
  * No support for SteamGuard, yet.
