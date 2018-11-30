@@ -1,10 +1,18 @@
-# steamcmd
+# zobees/steamcmd
 
-A docker container for Steam based game servers via [SteamCMD](https://developer.valvesoftware.com/wiki/SteamCMD).
+A generic docker base container for [SteamCMD](https://developer.valvesoftware.com/wiki/SteamCMD).
 
 ## Overview
 
-Includes steamcmd and its dependencies.  Just run `$STEAMCMD_DIR/steamcmd.sh` in your own Dockerfile or via `docker run` or `docker exec`, etc.
+The `steamcmd` binary is installed in `/usr/games`, but is also symlinked to `/usr/bin/steamcmd` and therefore present in the default path.
+
+## Changes
+
+### 0.1.1
+
+ * Switch from Ubuntu 14.04 to 16.04
+ * SteamCMD is now installed via apt, which means that the environment variable `STEAMCMD_DIR` is no longer required, and `$STEAMCMD_DIR/steamcmd.sh` command is now just `steamcmd`.
+ * The image no longer creates a `steam` user, so you'll need to do this yourself if required.
 
 ## Disclaimer
 
