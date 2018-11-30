@@ -2,7 +2,5 @@
 
 set -e
 
-TARGET_UID=${UID:-0}
-TARGET_GID=${GID:-0}
-
-exec gosu $TARGT_UID:$TARGET_GID steamcmd-run "$@"
+[ "$1" = "steamcmd-run" ] && exec gosu ${UID:-0}:${GID:-0} "$@"
+exec gosu ${UID:-0}:${GID:-0} "steamcmd-env $@"

@@ -1,13 +1,14 @@
-FROM zobees/steamcmd-base:0.0.1
+FROM zobees/steamcmd-base:0.0.2
 
 RUN apt-get -y update && \
     DEBIAN_FRONTEND=noninteractive apt-get install -q -y --no-install-recommends gosu && \
     rm -rf /var/lib/apt/lists/*
 
-ADD steamcmd-entrypoint /usr/bin/steamcmd-entrypoint
-ADD steamcmd-run /usr/bin/steamcmd-run
+ADD steamcmd-entrypoint /usr/local/bin/steamcmd-entrypoint
+ADD steamcmd-env /usr/local/bin/steamcmd-env
+ADD steamcmd-run /usr/local/bin/steamcmd-run
 
-ENTRYPOINT ["/usr/bin/steamcmd-entrypoint"]
+ENTRYPOINT ["/usr/local/bin/steamcmd-entrypoint"]
 
 CMD ["true"]
 

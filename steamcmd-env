@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+
+set -e
+
+app_dir=${STEAMCMD_APP_DIR:-/data}
+cd $app_dir
+export LD_LIBRARY_PATH=.
+
+exec "$@"

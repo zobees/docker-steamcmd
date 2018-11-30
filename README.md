@@ -4,25 +4,32 @@ A generic docker container for [SteamCMD](https://developer.valvesoftware.com/wi
 
 ## Usage
 
-Installs the app specified by `STEAMCMD_APP_ID` into the directory specified by `STEAMCMD_APP_DIR` (default: `/data`).
+Extends the [zobees/steamcmd-base](https://github.com/zobees/docker-steamcmd-base) image, providing a `steamcmd-run` wrapper command that:
 
-Note that you must also set `STEAMCMD_APP_UPDATE` to a non-empty value to actually run steamcmd. This is required so that one-off commands on running containers do not inadvertantly change files that are in use.
+ 1. Installs or updates the app specified by `STEAMCMD_APP_ID` into the directory specified by `STEAMCMD_APP_DIR` (defaults to `/data`).
+ 2. Drops privileges to the specified `UID` and `GID` (both default to 0).
+ 3. Executes the rest of the command line verbatim.
 
-For example you could run a 7 Days to Die dedicated server with the following command:
+In most cases you should be able to use the image as-is, however I highly recommended that instead you extend it and add any app specific startup scripts, health checks and handle graceful shutdowns appropriately.
+
+## Example
+
+Running a default 7 Days to Die dedicated server:
 
 ```
 docker run -d -v $PWD/data:/data \
   -p 26900-26902:26900-26902 \
   -p 26900-26902:26900-26902/udp \
   -e STEAMCMD_APP_ID=294420 \
-  -e STEAMCMD_APP_UPDATE=true \
   zobees/steamcmd \
-  ./7DaysToDieServer.x86_64 -logfile /dev/stdout -configfile=serverconfig.xml -quit -batchmode -nographics -dedicated
+  steamcmd-run ./7DaysToDieServer.x86_64 -logfile /dev/stdout -configfile=serverconfig.xml -quit -batchmode -nographics -dedicated
 ```
 
-In most cases you should be able to use `docker run` with no problems, however I recommended that instead you extend this image and add any app specific startup scripts, health checks and handle graceful shutdowns appropriately.
-
 ## Advanced
+
+#### Volumes
+
+The image defines no specific volumes, however you probably want to at least mount `STEAMCMD_APP_DIR` (defaults to `/data`).
 
 #### System user
 
@@ -30,7 +37,7 @@ Specify the user and group to run as via the `UID` and `GID` environment variabl
 
 #### Authentication
 
-If authentication is required, specify the username and password separated by a space via `STEAMCMD_LOGIN` (default: `anonymous`).
+If authentication is required, specify the username and password separated by a space via `STEAMCMD_LOGIN` (defaults to `anonymous`).
 
 Note that SteamGuard is not yet supported, but is planned.
 
@@ -41,6 +48,10 @@ Use the `STEAMCMD_BETA` environment variable to specify which beta version to in
 #### Validation
 
 By default steamcmd is instructed to validate on installation, which does incur a delay when starting a container. Set `STEAMCMD_NO_VALIDATE` to disable validation, though it's not generally advisable.
+
+#### Skipping update
+
+If you're absolutely sure you want to skip running steamcmd after initial installation, you can set `STEAMCMD_SKIP_UPDATE` to do so. Note that you will need to run without this flag at least once in order to download the app in the first place.
 
 #### Other options
 
@@ -55,6 +66,12 @@ See the source code for this and its base image for more information:
  * No support for `app_set_config`.
 
 ## Changes
+
+### 0.3.2
+
+ * Updated entrypoint to allow one-off commands to bypass steamcmd and removed `STEAMCMD_APP_UPDATE` again.
+ * Added `STEAMCMD_SKIP_UPDATE`.
+ * Moved scripts to `/usr/local/bin/`.
 
 ### 0.3.1
 
