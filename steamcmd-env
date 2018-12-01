@@ -1,5 +1,0 @@
-#!/usr/bin/env bash
-
-cd /data
-export LD_LIBRARY_PATH=.
-exec "$@"

@@ -6,15 +6,17 @@ RUN apt-get -y update && \
 
 RUN addgroup --gid 1000 steam && \
     adduser --system --home /home/steam --shell /bin/false --uid 1000 --ingroup steam steam && \
+    usermod -a -G tty steam && \
     mkdir -m 777 /data && \
     chown steam:steam /data /home/steam
 
+ADD entrypoint.sh /entrypoint.sh
 ADD steamcmd-* /usr/local/bin/
-RUN chmod +x /usr/local/bin/steamcmd-*
+RUN chmod +x /entrypoint.sh /usr/local/bin/steamcmd-*
 
-ENV UID=1000 GID=1000
+ENV STEAMCMD_LOGIN=anonymous
 
-ENTRYPOINT ["/usr/local/bin/steamcmd-entrypoint"]
+ENTRYPOINT ["/entrypoint.sh"]
 
 CMD ["true"]
 

@@ -1,10 +1,6 @@
-#!/usr/bin/env bash
-
-set -e
+#!/bin/bash
 
 if [ -z "$STEAMCMD_SKIP_UPDATE" ]; then
-  login=${STEAMCMD_LOGIN:-anonymous}
-
   if [ -z "$STEAMCMD_APP_ID" ]; then
     echo "ERROR: STEAMCMD_APP_ID is required"
     exit 1
@@ -14,10 +10,10 @@ if [ -z "$STEAMCMD_SKIP_UPDATE" ]; then
   [ -n "$STEAMCMD_BETA" ]          && beta="-beta $STEAMCMD_BETA"
   [ -n "$STEAMCMD_BETA_PASSWORD" ] && betapassword="-betapassword $STEAMCMD_BETA_PASSWORD"
 
-  steamcmd +login $login \
+  steamcmd +login $STEAMCMD_LOGIN \
     +force_install_dir /data \
     +app_update $STEAMCMD_APP_ID $beta $betapassword $validate \
     +quit
 fi
 
-exec steamcmd-env "$@"
+exec $@
