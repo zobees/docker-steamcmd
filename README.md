@@ -6,8 +6,8 @@ A generic docker container for [SteamCMD](https://developer.valvesoftware.com/wi
 
 Extends the [zobees/steamcmd-base](https://github.com/zobees/docker-steamcmd-base) image, providing a `steamcmd-run` wrapper command that:
 
- 1. Installs or updates the app specified by `STEAMCMD_APP_ID` into the directory specified by `STEAMCMD_APP_DIR` (defaults to `/data`).
- 2. Drops privileges to the specified `UID` and `GID` (both default to 0).
+ 1. Installs or updates the app specified by `STEAMCMD_APP_ID` (into `/data`).
+ 2. Drops privileges to the specified `UID` and `GID` (both default to 1000).
  3. Executes the rest of the command line verbatim.
 
 In most cases you should be able to use the image as-is, however I highly recommended that instead you extend it and add any app specific startup scripts, health checks and handle graceful shutdowns appropriately.
@@ -26,10 +26,6 @@ docker run -d -v $PWD/data:/data \
 ```
 
 ## Advanced
-
-#### Volumes
-
-The image defines no specific volumes, however you probably want to at least mount `STEAMCMD_APP_DIR` (defaults to `/data`).
 
 #### System user
 
@@ -64,41 +60,6 @@ See the source code for this and its base image for more information:
 
  * No support for SteamGuard, yet.
  * No support for `app_set_config`.
-
-## Changes
-
-### 0.3.5
-
- * Fix permissions on data volume.
-
-### 0.3.4
-
- * Fixed issue preventing signals being trapped.
-
-### 0.3.3
-
- * Fixed typo in entrypoint.
-
-### 0.3.2
-
- * Updated entrypoint to allow one-off commands to bypass steamcmd and removed `STEAMCMD_APP_UPDATE` again.
- * Added `STEAMCMD_SKIP_UPDATE`.
- * Moved scripts to `/usr/local/bin/`.
-
-### 0.3.1
-
- * Added `STEAMCMD_APP_UPDATE` to simplify one off commands on running containers.
-
-### 0.2.1
-
- * Added `steamcmd-run` to automate steamcmd through environment variables.
- * Added ability to specify uid and gid.
-
-### 0.1.1
-
- * Switch from Ubuntu 14.04 to 16.04
- * SteamCMD is now installed via apt, which means that the environment variable `STEAMCMD_DIR` is no longer required, and `$STEAMCMD_DIR/steamcmd.sh` command is now just `steamcmd`.
- * The image no longer creates a `steam` user, so you'll need to do this yourself if required.
 
 ## Disclaimer
 

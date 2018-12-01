@@ -1,11 +1,26 @@
 #!/usr/bin/env bash
 
-set -e
+umask 0002
+chmod g+w /data
 
-uid=${UID:-0}
-gid=${GID:-0}
+if [ $(id -u) = 0 ]; then
+  if [[ -v UID && $UID != $(id -u) ]]; then
+    usermod -u $UID steam
+  fi
 
-[[ $(stat -c "%u" /data) != $UID ]] && chown -R $uid:$gid /data
+  if [[ -v GID ]]; then
+    groupmod -o -g $GID steam
+  fi
 
-[ "$1" = "steamcmd-run" ] && exec gosu $uid:$gid "$@"
-exec gosu $uid:$uid steamcmd-env "$@"
+  if [[ $(stat -c "%u" /data) != $UID ]]; then
+    chown -R steam:steam /data
+  fi
+
+  if [ "$1" = "steamcmd-run" ]; then
+    exec gosu steam:steam "$@"
+  else
+    exec gosu steam:steam steamcmd-env "$@"
+  fi
+else
+  exec steamcmd-env "$@"
+fi

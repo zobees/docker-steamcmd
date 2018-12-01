@@ -3,7 +3,6 @@
 set -e
 
 if [ -z "$STEAMCMD_SKIP_UPDATE" ]; then
-  app_dir=${STEAMCMD_APP_DIR:-/data}
   login=${STEAMCMD_LOGIN:-anonymous}
 
   if [ -z "$STEAMCMD_APP_ID" ]; then
@@ -16,7 +15,7 @@ if [ -z "$STEAMCMD_SKIP_UPDATE" ]; then
   [ -n "$STEAMCMD_BETA_PASSWORD" ] && betapassword="-betapassword $STEAMCMD_BETA_PASSWORD"
 
   steamcmd +login $login \
-    +force_install_dir $app_dir \
+    +force_install_dir /data \
     +app_update $STEAMCMD_APP_ID $beta $betapassword $validate \
     +quit
 fi
