@@ -67,6 +67,10 @@ See the source code for this and its base image for more information:
 
 ## Changes
 
+### 0.3.5
+
+ * Fix permissions on data volume.
+
 ### 0.3.4
 
  * Fixed issue preventing signals being trapped.

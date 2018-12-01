@@ -1,4 +1,4 @@
-FROM zobees/steamcmd-base:0.0.2
+FROM zobees/steamcmd-base
 
 RUN apt-get -y update && \
     DEBIAN_FRONTEND=noninteractive apt-get install -q -y --no-install-recommends gosu && \

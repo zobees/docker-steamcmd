@@ -2,5 +2,10 @@
 
 set -e
 
-[ "$1" = "steamcmd-run" ] && exec gosu ${UID:-0}:${GID:-0} "$@"
-exec gosu ${UID:-0}:${GID:-0} steamcmd-env "$@"
+uid=${UID:-0}
+gid=${GID:-0}
+
+[[ $(stat -c "%u" /data) != $UID ]] && chown -R $uid:$gid /data
+
+[ "$1" = "steamcmd-run" ] && exec gosu $uid:$gid "$@"
+exec gosu $uid:$uid steamcmd-env "$@"

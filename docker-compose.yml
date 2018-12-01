@@ -6,6 +6,9 @@ services:
     command: "steamcmd-run ./7DaysToDieServer.x86_64 -logfile /dev/stdout -configfile=serverconfig.xml -quit -batchmode -nographics -dedicated"
     environment:
       STEAMCMD_APP_ID: "294420"
+      STEAMCMD_SKIP_UPDATE: "true"
+      # UID: "1001"
+      # GID: "1001"
     ports:
       - "26900-26902:26900-26902"
       - "26900-26902:26900-26902/udp"
