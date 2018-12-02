@@ -50,7 +50,7 @@ By default steamcmd is instructed to validate installed files, which does incur 
 
 ## Skipping update
 
-If you're absolutely sure you want to skip running steamcmd after initial installation, you can set `STEAMCMD_SKIP_UPDATE` to do so. Note that you will need to run without this flag at least once in order to download the app in the first place.
+If you're absolutely sure you want to skip running steamcmd after initial installation, you can set `STEAMCMD_SKIP` to do so. Note that you will need to run without this flag at least once in order to download the app in the first place.
 
 ## Known limitations
 

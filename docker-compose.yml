@@ -8,7 +8,7 @@ services:
     command: "steamcmd-wrapper ./7DaysToDieServer.x86_64 -logfile /dev/stdout -configfile=serverconfig.xml -quit -batchmode -nographics -dedicated"
     environment:
       STEAMCMD_APP_ID: "294420"
-      STEAMCMD_SKIP_UPDATE: "true"
+      STEAMCMD_SKIP: "true"
       USER_UID: "1000"
       USER_GID: "1000"
     ports:
