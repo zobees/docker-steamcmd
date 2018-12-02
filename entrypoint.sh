@@ -23,8 +23,8 @@ if [ $(id -u) = 0 ]; then
   fi
 
   echo "Running command as steam user"
-  exec gosu steam:steam $@
+  set -- gosu steam:steam "$@"
 fi
 
-echo "Running command"
-exec $@
+echo "Running $@"
+exec "$@"

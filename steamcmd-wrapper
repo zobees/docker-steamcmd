@@ -16,4 +16,4 @@ if [ -z "$STEAMCMD_SKIP_UPDATE" ]; then
     +quit
 fi
 
-exec $@
+exec "$@"
