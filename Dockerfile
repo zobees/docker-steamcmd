@@ -1,7 +1,13 @@
-FROM zobees/steamcmd-base
+FROM ubuntu:16.04
 
-RUN apt-get -y update && \
-    DEBIAN_FRONTEND=noninteractive apt-get install -q -y --no-install-recommends gosu && \
+RUN echo steam steam/question select "I AGREE" | debconf-set-selections && \
+    echo steam steam/license note '' | debconf-set-selections && \
+    dpkg --add-architecture i386 && \
+    apt-get -q -y update && \
+    DEBIAN_FRONTEND=noninteractive apt-get install -q -y --no-install-recommends \
+      lib32gcc1 steamcmd ca-certificates gosu && \
+    ln -sf /usr/games/steamcmd /usr/bin/steamcmd && \
+    DEBIAN_FRONTEND=noninteractive apt-get autoremove -q -y && \
     rm -rf /var/lib/apt/lists/*
 
 RUN addgroup --gid 1000 steam && \
@@ -18,6 +24,6 @@ ENV STEAMCMD_LOGIN=anonymous
 
 ENTRYPOINT ["/entrypoint.sh"]
 
-CMD ["true"]
+CMD ["steamcmd-wrapper", "true"]
 
 LABEL maintainer cliffrowley@gmail.com

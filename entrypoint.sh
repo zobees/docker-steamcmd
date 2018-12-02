@@ -7,17 +7,17 @@ cd /data
 export LD_LIBRARY_PATH=.
 
 if [ $(id -u) = 0 ]; then
-  if [[ -v SET_UID && "$SET_UID" != "0" ]]; then
-    echo "Adjusting steam uid to $SET_UID"
-    usermod -u $SET_UID steam
+  if [[ -v USER_UID && "$USER_UID" != "0" ]]; then
+    echo "Adjusting steam uid to $USER_UID"
+    usermod -u $USER_UID steam
   fi
 
-  if [[ -v SET_GID ]]; then
-    echo "Adjusting steam gid to $SET_GID"
-    groupmod -o -g $SET_GID steam
+  if [[ -v USER_GID ]]; then
+    echo "Adjusting steam gid to $USER_GID"
+    groupmod -o -g $USER_GID steam
   fi
 
-  if [[ -v SET_UID && $(stat -c "%u" /data) != $SET_UID ]]; then
+  if [[ -v USER_UID && $(stat -c "%u" /data) != $USER_UID ]]; then
     echo "Adjusting file permissions"
     chown -R steam:steam /data /home/steam
   fi

@@ -5,12 +5,12 @@ services:
     image: zobees/steamcmd
     tty: true
     stdin_open: true
-    command: "steamcmd-run ./7DaysToDieServer.x86_64 -logfile /dev/stdout -configfile=serverconfig.xml -quit -batchmode -nographics -dedicated"
+    command: "steamcmd-wrapper ./7DaysToDieServer.x86_64 -logfile /dev/stdout -configfile=serverconfig.xml -quit -batchmode -nographics -dedicated"
     environment:
       STEAMCMD_APP_ID: "294420"
       STEAMCMD_SKIP_UPDATE: "true"
-      SET_UID: "1000"
-      SET_GID: "1000"
+      USER_UID: "1000"
+      USER_GID: "1000"
     ports:
       - "26900-26902:26900-26902"
       - "26900-26902:26900-26902/udp"
