@@ -4,6 +4,7 @@ set -e
 
 umask 0002
 chmod g+w /data
+chmod o+w /dev/stdout /dev/stderr
 
 cd /data
 export LD_LIBRARY_PATH=.
