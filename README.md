@@ -57,10 +57,6 @@ If you're absolutely sure you want to skip running steamcmd after initial instal
  * No support for SteamGuard, yet.
  * No support for `app_set_config`.
 
-## Known issues
-
- * On Docker for Mac, the normal user does not have permission to use `/dev/stdout`. This seems to be a known Docker issue, and I'll implement a work around asap.
-
 ## Disclaimer
 
 These containers are designed to be used by Zobees to host game servers for friends and family, and therefore may not suit all use cases.  That said, we are all for flexibility and would welcome pull requests and issues.
